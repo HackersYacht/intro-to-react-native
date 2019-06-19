@@ -1,7 +1,7 @@
 # An introduction to react-native
 
-# [checkbox:checked] Styling
+- [x] Styling
 
-# [checkbox:checked] State
+- [x] State
 
-# [checkbox:checked] Props
+- [x] Props
