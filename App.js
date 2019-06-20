@@ -1,47 +1,81 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 
-const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-  android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu"
-});
-
-type Props = {};
 export default class App extends Component {
-  render() {
-    //javascript xml . jsx
-    return (
-      <View style={styles.container}>
-        <View style={styles.main1}>
-          <Text style={styles.welcome}>Welcome to React Native!</Text>
-        </View>
+  state = {
+    time: "DAY"
+  };
 
-        <View style={styles.main2}>
-          <Text style={styles.instructions}>To get started, edit App.js</Text>
-          <Text style={styles.instructions}>{instructions}</Text>
+  render() {
+    if (this.state.time === "DAY") {
+      return (
+        <View style={myStyles.lightContainer}>
+          <Image
+            source={{ uri: "http://pngimg.com/uploads/sun/sun_PNG13448.png" }}
+            style={{ width: 150, height: 150, marginBottom: 150 }}
+          />
+          <TouchableOpacity
+            style={myStyles.darkBtn}
+            onPress={() => {
+              this.setState({ time: "NIGHT" });
+            }}
+          >
+            <Text style={myStyles.lightText}>Night</Text>
+          </TouchableOpacity>
         </View>
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View style={myStyles.darkContainer}>
+          <Image
+            source={{
+              uri: "https://i.ya-webdesign.com/images/moon-icon-png-8.png"
+            }}
+            style={{ width: 150, height: 150, marginBottom: 150 }}
+          />
+          <TouchableOpacity
+            style={myStyles.lightBtn}
+            onPress={() => {
+              this.setState({ time: "DAY" });
+            }}
+          >
+            <Text style={myStyles.darkText}>Day</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
+const myStyles = StyleSheet.create({
+  lightContainer: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#FFF"
   },
-  main1: { backgroundColor: "#F5FCFF", flex: 1 },
-  main2: { backgroundColor: "#DAB785", flex: 9 },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
+  lightBtn: {
+    backgroundColor: "#FFF",
+    paddingHorizontal: 60,
+    paddingVertical: 10,
+    borderRadius: 10
   },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
+  darkContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#000"
+  },
+  darkBtn: {
+    backgroundColor: "#000",
+    paddingHorizontal: 60,
+    paddingVertical: 10,
+    borderRadius: 10
+  },
+  lightText: {
+    color: "#FFF"
+  },
+  darkText: {
+    color: "#000"
   }
 });
